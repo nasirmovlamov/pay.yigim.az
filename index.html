@@ -1,0 +1,2325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Pay — Yığım</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/geist@5/index.css" crossorigin="">
+  <style>
+    :root {
+      --bg-page: #f5f5f5;
+      --card-bg: #ffffff;
+      --text-primary: #1a1a1a;
+      --text-secondary: #666666;
+      --border: #e5e5e5;
+      --tab-active-bg: #fff8e6;
+      --tab-active-border: #d4a84b;
+      --btn-gray-bg: #e8e8e8;
+      --btn-gray-text: #4a4a4a;
+      --btn-apple-bg: #000000;
+      --accent-green: #22c55e;
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-page);
+      min-height: 100vh;
+      padding: 24px 16px 40px;
+      color: var(--text-primary);
+    }
+
+    .card {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* ——— Push 30 section (Figma: Payment info / Price) ——— */
+    .push30 {
+      font-family: 'Geist', 'Inter', -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0;
+      width: 100%;
+      max-width: 400px;
+      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.04));
+      border-radius: 16px;
+      margin-bottom: 20px;
+      flex: none;
+      align-self: stretch;
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+
+    .push30-top {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+      gap: 20px;
+      width: 100%;
+      background: #FFFFFF;
+      border-bottom: 1px solid #F3F3F3;
+      flex: none;
+      align-self: stretch;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .push30-header {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 0;
+      gap: 20px;
+      width: 100%;
+      flex: none;
+      flex-grow: 0;
+      z-index: 0;
+    }
+
+    .push30-logo-wrap {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 4px 0;
+      gap: 10px;
+      width: 64px;
+      height: 72px;
+      flex: none;
+      flex-grow: 0;
+    }
+
+    .push30-logo {
+      width: 64px;
+      height: 64px;
+      background: #000000;
+      box-shadow: inset 0 8px 20px rgba(255, 255, 255, 0.4);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex: none;
+      flex-grow: 0;
+    }
+
+    .push30-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .push30-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0;
+      gap: 4px;
+      flex: 1;
+      min-width: 0;
+      min-height: 64px;
+    }
+
+    .push30-name {
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 20px;
+      color: #1E1E1E;
+      width: 100%;
+      flex: none;
+      align-self: stretch;
+    }
+
+    .push30-desc {
+      font-family: inherit;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #888888;
+      width: 100%;
+      flex: none;
+      align-self: stretch;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .push30-expand {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: 14px;
+      top: 14px;
+      border: none;
+      border-radius: 20px;
+      background: rgba(48, 48, 48, 0.08);
+      color: #4B4B4B;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      flex: none;
+      flex-grow: 0;
+      z-index: 1;
+    }
+
+    .push30-expand svg {
+      display: block;
+    }
+
+    .push30-bottom {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 16px 20px;
+      gap: 8px;
+      width: 100%;
+      background: #FFFFFF;
+      flex: none;
+      align-self: stretch;
+    }
+
+    .push30-total {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0 2px;
+      gap: 10px;
+      width: 100%;
+      border-radius: 6px;
+      flex: none;
+      align-self: stretch;
+    }
+
+    .push30-total-label {
+      font-family: inherit;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16px;
+      color: #888888;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .push30-total-amount {
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: -0.01em;
+      color: #1E1E1E;
+      flex: none;
+    }
+
+    .push30-approx {
+      width: 100%;
+      margin-top: 4px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: #f3f3f3;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .push30-approx-label {
+      font-family: inherit;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 18px;
+      color: #888888;
+    }
+
+    .push30-approx-value {
+      font-family: inherit;
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 18px;
+      color: #555555;
+      /* background: rgba(0, 0, 0, 0.04); */
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    .push30--expanded .push30-approx {
+      display: flex;
+    }
+
+    .push30--expanded .push30-expand svg {
+      transform: rotate(180deg);
+    }
+
+    /* ——— Tabs (Figma) ——— */
+    .tabs {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 4px;
+      gap: 4px;
+      width: 100%;
+      max-width: 400px;
+      height: 64px;
+      border-radius: 16px;
+      background: #F3F3F3;
+      margin-bottom: 24px;
+      flex: none;
+      align-self: stretch;
+    }
+
+    .tab {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8px;
+      gap: 4px;
+      width: 128px;
+      height: 56px;
+      border: none;
+      background: transparent;
+      border-radius: 16px;
+      cursor: pointer;
+      font-family: 'Geist', 'Inter', inherit;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.01em;
+      color: #888888;
+      transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+      flex: none;
+      flex-grow: 1;
+    }
+
+    .tab:hover {
+      color: #1E1E1E;
+    }
+
+    .tab.active {
+      background: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      color: #1E1E1E;
+    }
+
+    .tab-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      flex-grow: 0;
+    }
+
+    .tab-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .tab-icon-active {
+      display: none;
+    }
+
+    .tab-icon-default {
+      display: block;
+    }
+
+    .tab.active .tab-icon-default {
+      display: none;
+    }
+
+    .tab.active .tab-icon-active {
+      display: block;
+    }
+
+    /* ——— Payment details (Figma) ——— */
+    .payment-details {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+      gap: 20px;
+      width: 100%;
+      max-width: 400px;
+      background: #FFFFFF;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
+      border-radius: 16px;
+      flex: none;
+      align-self: stretch;
+    }
+
+    .payment-details .payment-details-form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0;
+      gap: 8px;
+      width: 100%;
+      flex: none;
+      align-self: stretch;
+    }
+
+    .payment-details .section-title-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0;
+      gap: 1px;
+      width: 100%;
+      flex: none;
+      align-self: stretch;
+    }
+
+    .payment-details .section-title {
+      margin: 0;
+      font-family: 'Geist', 'Inter', inherit;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: -0.01em;
+      color: #888888;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .payment-details .input-fields {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0;
+      gap: 8px;
+      width: 100%;
+      flex: none;
+      align-self: stretch;
+    }
+
+    .payment-details .input-row {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 0;
+      gap: 8px;
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    .payment-details .input-row:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .payment-details .input-group {
+      flex: 1;
+      position: relative;
+      min-width: 0;
+    }
+
+    .payment-details .input-group.full {
+      flex: 1;
+    }
+
+    .payment-details .input-group.half {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .payment-details input,
+    .payment-details select {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(48, 48, 48, 0.06);
+      border-radius: 12px;
+      font-family: 'Geist', 'Inter', inherit;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      background: #F7F7F7;
+      color: var(--text-primary);
+    }
+
+    .payment-details .input-group.full input {
+      padding: 12px 12px 12px 52px;
+    }
+
+    .payment-details .input-group.half input {
+      padding-left: 14px;
+    }
+
+    .payment-details input::placeholder {
+      color: #888888;
+    }
+
+    .months-dropdown {
+      position: relative;
+      width: 100%;
+      margin-top: 12px;
+      padding-top: 20px;
+      border-top: 1px solid #E5E7EB;
+    }
+
+    .months-dropdown-trigger {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 12px 40px 12px 14px;
+      border: 1px solid rgba(48, 48, 48, 0.06);
+      border-radius: 12px;
+      font-family: 'Geist', 'Inter', inherit;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      background: #F7F7F7;
+      color: var(--text-primary);
+      text-align: left;
+      cursor: pointer;
+      appearance: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .months-dropdown-trigger .months-dropdown-chevron {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat center;
+      transition: transform 0.2s ease;
+    }
+
+    .months-dropdown.open .months-dropdown-chevron {
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    .months-dropdown-backdrop {
+      display: none;
+    }
+
+    .months-dropdown-sheet {
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 4px);
+      margin: 0;
+      padding: 6px;
+      list-style: none;
+      background: #ffffff;
+      border: 1px solid rgba(48, 48, 48, 0.06);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      z-index: 10;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .months-dropdown.open .months-dropdown-sheet {
+      display: block;
+    }
+
+    .months-dropdown-sheet-title {
+      display: none;
+    }
+
+    .months-dropdown-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .months-dropdown-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      font-family: 'Geist', 'Inter', inherit;
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--text-primary);
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .months-dropdown-option:hover {
+      background: rgba(48, 48, 48, 0.06);
+    }
+
+    .months-dropdown-option-label {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .months-dropdown-option-price {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #F3F3F3;
+      font-size: 12px;
+      line-height: 1.4;
+      color: #6B7280;
+      white-space: nowrap;
+      margin-left: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .months-dropdown.open .months-dropdown-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      .months-dropdown.open .months-dropdown-sheet {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: auto;
+        max-height: 70vh;
+        padding: 24px 20px calc(28px + env(safe-area-inset-bottom, 0));
+        border-radius: 16px 16px 0 0;
+        border: none;
+        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        overflow-y: auto;
+      }
+
+      .months-dropdown-sheet-title {
+        display: block;
+        margin: 0 0 20px;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.3;
+        color: #1a1a1a;
+      }
+
+      .months-dropdown-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .months-dropdown-option[data-value=""] {
+        display: none;
+      }
+
+      .months-dropdown-option {
+        background: #F5F5F5;
+        border-radius: 12px;
+        padding: 14px 16px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      }
+
+      .months-dropdown-option:hover {
+        background: #EEEEEE;
+      }
+
+      .months-dropdown-option-price {
+        background: transparent;
+        color: var(--text-primary);
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+
+    .payment-details .input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 22px;
+      pointer-events: none;
+      background: rgba(48, 48, 48, 0.12);
+      border-radius: 3px;
+      background-image: url('icons/gray-card-icon.png');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .payment-details .actions {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0;
+      gap: 12px;
+      width: 100%;
+      margin-top: auto;
+      align-self: stretch;
+    }
+
+    .payment-details .btn {
+      width: 100%;
+      height: 44px;
+      padding: 10px 24px;
+      border-radius: 100px;
+      font-family: 'Geist', 'Inter', inherit;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .payment-details .btn-pay {
+      background: rgba(136, 136, 136, 0.28);
+      color: #B5B5B5;
+    }
+
+    .payment-details .btn-pay.btn-yellow {
+      background: #facc15;
+      color: #1a1a1a;
+    }
+
+    .payment-details .or-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0;
+      gap: 16px;
+      width: 100%;
+      height: 20px;
+    }
+
+    .payment-details .or-line {
+      flex: 1;
+      height: 1px;
+      background: #EAEAEC;
+      min-width: 0;
+    }
+
+    .payment-details .or {
+      font-family: 'Geist', 'Inter', inherit;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #888888;
+      flex: none;
+      margin: 0;
+    }
+
+    .payment-details .btn-apple {
+      background: #2A2A2A;
+      color: #fff;
+    }
+
+    .section-title {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .input-group {
+      flex: 1;
+      position: relative;
+    }
+
+    .input-group.full {
+      flex: 1;
+    }
+
+    .input-group.half {
+      flex: 0 0 calc(50% - 6px);
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 14px 14px 14px 44px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 15px;
+      background: #fafafa;
+      color: var(--text-primary);
+    }
+
+    .input-group.half input {
+      padding-left: 14px;
+    }
+
+    input::placeholder {
+      color: #999;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 14px;
+      pointer-events: none;
+      background: url('icons/gray-card-icon.png') center/contain no-repeat;
+    }
+
+    select {
+      padding: 14px 40px 14px 14px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      cursor: pointer;
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    /* Installment card prompt — Figma */
+    .installment-card-prompt {
+      display: none;
+      margin-top: 20px;
+      padding: 16px;
+      background: #F3F3F3;
+      border-radius: 12px;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .installment-card-prompt.visible {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .installment-card-prompt-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .installment-card-prompt-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .installment-card-prompt-icon img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    .installment-card-prompt-text {
+      font-size: 16px;
+      line-height: 1.35;
+      color: #1E1E1E;
+      flex: 1;
+    }
+
+    .installment-card-prompt .btn-installment-switch {
+      width: 173px;
+      height: 36px;
+      border-radius: 100px;
+      border: none;
+      background: #FFC107;
+      color: #1E1E1E;
+      font-family: 'Geist', 'Inter', inherit;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 24px;
+      cursor: pointer;
+      align-self: flex-start;
+      margin-left: 30px;
+    }
+
+    .installment-card-prompt .btn-installment-switch:hover {
+      background: #E5B810;
+    }
+
+    .installment-meta {
+      margin-top: 20px;
+      padding-top: 20px;
+      /* border-top: 1px solid var(--border); */
+    }
+
+    .installment-title {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .installment-title .info {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      background: #E5E5E5;
+      border: none;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 600;
+      font-style: normal;
+      color: #4a4a4a;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: help;
+      line-height: 1;
+    }
+
+    .flags {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .flag {
+      width: 28px;
+      height: 20px;
+      border-radius: 3px;
+    }
+
+    .flag.az { background: linear-gradient(to bottom, #0092bc 0%, #0092bc 33%, #ef3340 33%, #ef3340 66%, #00a651 66%, #00a651 100%); }
+    .flag.uz { background: linear-gradient(to bottom, #0099b5 0%, #0099b5 33%, #fff 33%, #fff 66%, #1eb53a 66%, #1eb53a 100%); }
+    .flag.kz { background: linear-gradient(to right, #00afca 33%, #fec50 33%, #fec50 66%, #00afca 66%); }
+
+    .flags .flag-icon {
+      height: 20px;
+      width: auto;
+      border-radius: 2px;
+      object-fit: contain;
+    }
+
+    .banks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .bank-logo {
+      height: 24px;
+      max-width: 80px;
+      object-fit: contain;
+      filter: grayscale(0.3);
+    }
+
+    .bank-placeholder {
+      height: 24px;
+      padding: 0 8px;
+      display: inline-flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    /* ——— Payment Logos section (Figma: down section, 177px margin from top) ——— */
+    .payment-logos-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      gap: 20px;
+      width: 100%;
+      max-width: 400px;
+      margin-top: 177px;
+      flex: none;
+      align-self: stretch;
+    }
+
+    .payment-logos-section .payment-logos {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      gap: 20px;
+      width: 100%;
+      max-width: 311px;
+      opacity: 0.5;
+      flex: none;
+      flex-grow: 0;
+      margin: 0;
+    }
+
+    .payment-logos-section .payment-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      flex-grow: 0;
+    }
+
+    .payment-logos-section .payment-logo img {
+      height: 18px;
+      width: auto;
+      max-width: 34px;
+      object-fit: contain;
+    }
+
+    .payment-logos-section .secure-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      gap: 6px;
+      width: 100%;
+      max-width: 360px;
+      height: 22px;
+      flex: none;
+      align-self: stretch;
+      margin: 0;
+    }
+
+    .payment-logos-section .secure-row svg {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      color: #2ABD8E;
+    }
+
+    .payment-logos-section .secure-row span:not(.yigim-logo) {
+      font-family: 'Geist', 'Inter', inherit;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      color: #888888;
+      flex: none;
+    }
+
+    .payment-logos-section .yigim-logo {
+      width: 65px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      flex-grow: 0;
+    }
+
+    .payment-logos-section .yigim-logo img {
+      height: 100%;
+      width: auto;
+      max-width: 65px;
+      object-fit: contain;
+    }
+
+    .page-footer {
+      max-width: 480px;
+      margin: 24px auto 0;
+      padding: 0 16px;
+    }
+
+    .page-footer .payment-logos-section {
+      margin-top: 0;
+    }
+
+    .payment-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin: 20px 0 12px;
+    }
+
+    .payment-logo {
+      height: 24px;
+      object-fit: contain;
+    }
+
+    .payment-logo-placeholder {
+      width: 40px;
+      height: 24px;
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    .payment-logo img {
+      height: 24px;
+      width: auto;
+      max-width: 40px;
+      object-fit: contain;
+    }
+
+    .secure-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .secure-row svg {
+      flex-shrink: 0;
+      color: var(--accent-green);
+    }
+
+    .yigim-logo {
+      width: 28px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .yigim-logo img {
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px 24px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .btn-pay {
+      background: var(--btn-gray-bg);
+      color: var(--btn-gray-text);
+    }
+
+    .btn-pay.btn-yellow {
+      background: #facc15;
+      color: #1a1a1a;
+    }
+
+    #panel-bank{
+      width: 100%;
+    }
+
+    #panel-bank .section-title {
+      margin-bottom: 16px;
+    }
+
+    .bank-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .bank-option {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      height: 48px;
+      min-height: 48px;
+      padding: 8px 12px 8px 8px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      border: 2px solid transparent;
+      background: #F5F5F5;
+      position:relative;
+    }
+
+    .bank-option:hover {
+      background: #EEEEEE;
+    }
+
+    .bank-option.selected {
+      background: #F7EED2;
+      border-color: #ECA11D;
+    }
+
+    .bank-option.selected:hover {
+      background: #F7EED2;
+    }
+
+    .bank-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .bank-icon {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .bank-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .bank-icon.birpay { background: transparent; }
+    .bank-icon.m10 { background: transparent; }
+    .bank-icon.abb { background: transparent; }
+    .bank-icon.akart { background: transparent; }
+
+    .bank-option .bank-label {
+      flex: 1;
+      font-weight: 600;
+      font-size: 15px;
+      color: #1a1a1a;
+    }
+
+    .bank-radio {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #E0E0E0;
+      border: none;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .bank-option.selected .bank-radio {
+      background: #ECA11D;
+    }
+
+    .bank-option.selected .bank-radio::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 6px;
+      height: 6px;
+      background: #ffffff;
+      border-radius: 50%;
+    }
+
+    .btn-apple {
+      background: var(--btn-apple-bg);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-apple-icon {
+      height: 18px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .or {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+    }
+
+    .modal-overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      max-width: 320px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .info-modal {
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 32px 32px 28px;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .info-modal-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      background: #F0EBE0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .info-modal-icon img {
+      display: block;
+    }
+
+    .info-modal-title {
+      margin: 0 0 12px;
+      font-size: 18px;
+      line-height: 1.4;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .info-modal-text {
+      margin: 0 0 24px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .info-modal-btn {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 32px;
+      border-radius: 12px;
+      border: none;
+      background: #F7F7F7;
+      color: #374151;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .info-modal-btn:hover {
+      background: #EBEBEB;
+    }
+
+    .modal-spinner {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 24px;
+      border: 4px solid var(--border);
+      border-top-color: #facc15;
+      border-radius: 50%;
+      animation: modal-spin 0.8s linear infinite;
+    }
+
+    @keyframes modal-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .modal-title {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .modal-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ——— Error modal (Figma: Error state) ——— */
+    .modal-error {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 24px 24px;
+      gap: 40px;
+      isolation: isolate;
+      width: 400px;
+      height: 500px;
+      max-width: calc(100vw - 48px);
+      box-sizing: border-box;
+      background: #FFFFFF;
+      box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.04);
+      border-radius: 20px;
+      flex: none;
+      align-self: center;
+      flex-grow: 0;
+      position: relative;
+      font-family: 'Geist', 'Inter', -apple-system, sans-serif;
+    }
+
+    .modal-error-close {
+      display: none; /* shown when needed */
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      right: 12px;
+      top: 12px;
+      background: rgba(13, 14, 12, 0.05);
+      border: none;
+      border-radius: 70px;
+      cursor: pointer;
+      flex: none;
+      flex-grow: 0;
+      z-index: 0;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-error-close svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .modal-error-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+      gap: 32px;
+      width: 352px;
+      flex: none;
+      order: 1;
+      align-self: stretch;
+      flex-grow: 0;
+      z-index: 1;
+    }
+
+    .modal-error-icon-wrap {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      width: 64px;
+      height: 64px;
+      background: rgba(255, 50, 54, 0.12);
+      border-radius: 72px;
+      flex: none;
+      flex-grow: 0;
+    }
+
+    .modal-error-icon-wrap svg {
+      width: 40px;
+      height: 40px;
+      flex: none;
+      stroke: #FF3236;
+      fill: none;
+    }
+
+    .modal-error-heading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+      gap: 16px;
+      width: 100%;
+      max-width: 227px;
+      flex: none;
+      flex-grow: 0;
+    }
+
+    .modal-error-label {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #888888;
+      flex: none;
+      flex-grow: 0;
+    }
+
+    .modal-error-title {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 28px;
+      text-align: center;
+      letter-spacing: -0.01em;
+      color: #1E1E1E;
+      width: 227px;
+      max-width: 100%;
+      flex: none;
+      align-self: center;
+      flex-grow: 0;
+    }
+
+    .modal-error-card {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 12px 20px;
+      gap: 2px;
+      width: 352px;
+      height: 124px;
+      background: transparent;
+      border: 1px solid #F3F3F3;
+      box-shadow: 0 0 0 1px #E8E8E8;
+      border-radius: 16px;
+      flex: none;
+      order: 2;
+      align-self: stretch;
+      flex-grow: 0;
+      z-index: 2;
+    }
+
+    .modal-error-row {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      width: 100%;
+      min-height: 32px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      flex: none;
+      align-self: stretch;
+      flex-grow: 0;
+    }
+
+    .modal-error-row:last-child {
+      border-bottom: none;
+    }
+
+    .modal-error-row-label {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: -0.01em;
+      color: #888888;
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .modal-error-row-value {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: -0.01em;
+      color: #1E1E1E;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .modal-error-btn {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 24px;
+      gap: 8px;
+      width: 352px;
+      height: 44px;
+      align-self: stretch;
+      max-width: 100%;
+      box-sizing: border-box;
+      background: #F75E4D;
+      border: none;
+      border-radius: 100px;
+      font-family: inherit;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: #FFFFFF;
+      cursor: pointer;
+      flex: none;
+      order: 3;
+      align-self: stretch;
+      flex-grow: 0;
+      z-index: 3;
+      transition: opacity 0.2s;
+    }
+
+    .modal-error-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Mobile: relax max-widths so content uses full width */
+    @media (max-width: 768px) {
+      .card {
+        max-width: 100%;
+        padding: 20px 16px;
+      }
+
+      .push30 {
+        max-width: 100%;
+      }
+
+      .tabs {
+        max-width: 100%;
+        width: 100%;
+        padding: 4px;
+        gap: 4px;
+      }
+
+      .tab {
+        flex: 1 1 0;
+        min-width: 0;
+        width: auto;
+        padding: 6px 4px;
+        font-size: 11px;
+      }
+
+      .payment-details {
+        max-width: 100%;
+        display: block;
+      }
+
+      .payment-details .actions {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        margin-top: 0;
+        padding: 16px 20px calc(16px + env(safe-area-inset-bottom, 0));
+        background: #ffffff;
+        box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+        transform: translateZ(0);
+      }
+
+      .card {
+        padding-bottom: 190px;
+      }
+
+      .page-footer {
+        max-width: 100%;
+        padding-bottom: 190px;
+      }
+
+      .modal-overlay {
+        padding: 16px;
+      }
+
+      .modal {
+        max-width: calc(100vw - 32px);
+      }
+
+      .info-modal {
+        max-width: calc(100vw - 32px);
+        padding: 24px 20px 20px;
+      }
+
+      /* Buttons section: match Figma mobile — pill buttons, full width, clear OR divider */
+      .payment-details .actions .btn {
+        width: 100%;
+        min-height: 48px;
+        padding: 14px 24px;
+        border-radius: 100px;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .payment-details .actions .btn-pay {
+        background: #E5E7EB;
+        color: #4a4a4a;
+      }
+
+      .payment-details .actions .btn-pay.btn-yellow {
+        background: #facc15;
+        color: #1a1a1a;
+      }
+
+      .payment-details .actions .btn-apple {
+        background: #000000;
+        color: #fff;
+        min-height: 48px;
+      }
+
+      .payment-details .actions .or-row {
+        display: none;
+      }
+
+    }
+
+    /* Error modal: mobile — 100vh, 24px from top, card 6px sides, button at bottom */
+    @media (max-width: 768px) {
+      #modal-error {
+        padding: 24px 0 0;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+
+      .modal-error {
+        width: 100%;
+        max-width: none;
+        height: calc(100vh - 24px);
+        min-height: calc(100vh - 24px);
+        padding: 0 24px 24px;
+        justify-content: flex-start;
+        background: transparent;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .modal-error-body {
+        width: 100%;
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .modal-error-card {
+        width: 100%;
+        height: auto;
+        min-height: 124px;
+        padding-left: 6px;
+        padding-right: 6px;
+      }
+
+      .modal-error-btn {
+        width: 100%;
+        margin-top: auto;
+        border-radius: 100px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .card { padding: 16px; }
+      .input-row { flex-direction: column; }
+      .input-group.half { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <section class="push30" aria-label="Push 30 payment service">
+      <div class="push30-top">
+        <div class="push30-header">
+          <div class="push30-logo-wrap">
+            <div class="push30-logo"><img src="icons/push30-icon.png" alt="Push 30"></div>
+          </div>
+          <div class="push30-info">
+            <span class="push30-name">Push 30</span>
+            <p class="push30-desc">Push 30 is a modern payment service that allows you to make fast, secure payments online.</p>
+          </div>
+        </div>
+        <button type="button" class="push30-expand" aria-label="Expand">
+          <svg width="6" height="3" viewBox="0 0 6 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1L3 2.5L5 1"/></svg>
+        </button>
+      </div>
+      <div class="push30-bottom">
+        <div class="push30-total">
+          <span class="push30-total-label">Total price</span>
+          <span class="push30-total-amount">100.00 AZN</span>
+        </div>
+        <div class="push30-approx" id="push30-approx">
+          <span class="push30-approx-label">Approximate amount</span>
+          <span class="push30-approx-value">723,850.59 UZS</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="tabs" role="tablist">
+      <button type="button" class="tab active" role="tab" aria-selected="true" data-tab="card">
+        <span class="tab-icon">
+          <img src="icons/card-icon.svg" alt="" class="tab-icon-default">
+          <img src="icons/card-icon-active.svg" alt="" class="tab-icon-active">
+        </span>
+        <span>Card</span>
+      </button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-tab="installment">
+        <span class="tab-icon">
+          <img src="icons/percentage-icon.svg" alt="" class="tab-icon-default">
+          <img src="icons/percentage-icon-active.svg" alt="" class="tab-icon-active">
+        </span>
+        <span>Installment</span>
+      </button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-tab="bank">
+        <span class="tab-icon">
+          <img src="icons/bank-icon.svg" alt="" class="tab-icon-default">
+          <img src="icons/bank-icon-active.svg" alt="" class="tab-icon-active">
+        </span>
+        <span>Bank pay</span>
+      </button>
+    </div>
+
+    <div class="payment-details">
+    <div id="panel-card" class="panel active">
+      <div class="payment-details-form">
+        <div class="section-title-row">
+          <h2 class="section-title">Enter the card details</h2>
+        </div>
+        <div class="input-fields">
+          <div class="input-row">
+            <div class="input-group full">
+              <span class="input-icon" aria-hidden="true"></span>
+              <input type="text" placeholder="Card number" inputmode="numeric" maxlength="19" autocomplete="cc-number">
+            </div>
+          </div>
+          <div class="input-row">
+            <div class="input-group half">
+              <input type="text" placeholder="MM/YY" maxlength="5" autocomplete="cc-exp">
+            </div>
+            <div class="input-group half">
+              <input type="text" placeholder="CVC" inputmode="numeric" maxlength="4" autocomplete="cc-csc">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installment-card-prompt" id="installment-card-prompt" aria-live="polite">
+        <div class="installment-card-prompt-row">
+          <span class="installment-card-prompt-icon" aria-hidden="true">
+            <img src="icons/percentage-icon.svg" alt="">
+          </span>
+          <p class="installment-card-prompt-text">You have entered an installment card. Switch to installment payment?</p>
+        </div>
+        <button type="button" class="btn-installment-switch" id="btn-installment-switch">Pay in Installments</button>
+      </div>
+    </div>
+
+    <div id="panel-installment" class="panel">
+      <div class="payment-details-form">
+        <div class="section-title-row">
+          <h2 class="section-title">Enter the card details</h2>
+        </div>
+        <div class="input-fields">
+          <div class="input-row">
+            <div class="input-group full">
+              <span class="input-icon" aria-hidden="true"></span>
+              <input type="text" placeholder="Card number" inputmode="numeric" maxlength="19" autocomplete="cc-number">
+            </div>
+          </div>
+          <div class="input-row">
+            <div class="input-group half">
+              <input type="text" placeholder="MM/YY" maxlength="5" autocomplete="cc-exp">
+            </div>
+            <div class="input-group half">
+              <input type="text" placeholder="CVC" inputmode="numeric" maxlength="4" autocomplete="cc-csc">
+            </div>
+          </div>
+          <div class="input-row">
+            <div class="input-group full">
+              <div class="months-dropdown" id="months-dropdown">
+                <select aria-label="Choose months" id="months-select" name="months" hidden aria-hidden="true">
+                  <option value="">Choose months</option>
+                  <option value="3">3 months</option>
+                  <option value="6">6 months</option>
+                  <option value="12">12 months</option>
+                  <option value="24">24 months</option>
+                </select>
+                <button type="button" class="months-dropdown-trigger" id="months-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="months-trigger-label">
+                  <span id="months-trigger-label">Choose months</span>
+                  <span class="months-dropdown-chevron" aria-hidden="true"></span>
+                </button>
+                <div class="months-dropdown-backdrop" id="months-dropdown-backdrop" aria-hidden="true"></div>
+                <div class="months-dropdown-sheet">
+                  <h3 class="months-dropdown-sheet-title">Choose months</h3>
+                  <ul class="months-dropdown-list" id="months-list" role="listbox" aria-label="Choose months" hidden>
+                    <li class="months-dropdown-option" role="option" data-value="" data-label="Choose months">
+                      <span class="months-dropdown-option-label">Choose months</span>
+                    </li>
+                    <li class="months-dropdown-option" role="option" data-value="3" data-label="3 months">
+                      <span class="months-dropdown-option-label">3 months</span>
+                      <span class="months-dropdown-option-price">33.39 AZN / Month</span>
+                    </li>
+                    <li class="months-dropdown-option" role="option" data-value="6" data-label="6 months">
+                      <span class="months-dropdown-option-label">6 months</span>
+                      <span class="months-dropdown-option-price">16.66 AZN / Month</span>
+                    </li>
+                    <li class="months-dropdown-option" role="option" data-value="12" data-label="12 months">
+                      <span class="months-dropdown-option-label">12 months</span>
+                      <span class="months-dropdown-option-price">8.33 AZN / Month</span>
+                    </li>
+                    <li class="months-dropdown-option" role="option" data-value="24" data-label="24 months">
+                      <span class="months-dropdown-option-label">24 months</span>
+                      <span class="months-dropdown-option-price">4.16 AZN / Month</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="installment-meta">
+        <div class="installment-title">
+          Installment card supported countries
+          <span class="info" title="Supported countries">i</span>
+        </div>
+        <div class="flags">
+          <img src="icons/azerbaijan-flag.svg" alt="Azerbaijan" title="Azerbaijan" class="flag-icon">
+          <img src="icons/uzbekistan-flag.svg" alt="Uzbekistan" title="Uzbekistan" class="flag-icon">
+          <img src="icons/kazakhstan-flag.svg" alt="Kazakhstan" title="Kazakhstan" class="flag-icon">
+        </div>
+        <div class="installment-title">Installment card supported banks</div>
+        <div class="banks">
+          <img src="icons/unibank-logo.svg" alt="Unibank" class="bank-logo">
+          <img src="icons/tamkart-logo.svg" alt="Tamkart" class="bank-logo">
+          <img src="icons/birbank-logo.svg" alt="Birbank" class="bank-logo">
+          <img src="icons/bolkart-logo.svg" alt="Bolkart" class="bank-logo">
+          <img src="icons/kapitalbank-logo.svg" alt="Kapital Bank" class="bank-logo">
+          <img src="icons/uzumbank.svg" alt="Uzum Bank" class="bank-logo">
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-bank" class="panel">
+      <h2 class="section-title">Choose the bank</h2>
+      <ul class="bank-list" role="radiogroup" aria-label="Choose the bank">
+        <li class="bank-option" data-bank="birpay">
+          <input type="radio" name="bank" id="bank-birpay" value="birpay">
+          <span class="bank-icon birpay"><img src="icons/birpay-logo.svg" alt="Bir Pay"></span>
+          <span class="bank-label">Bir Pay</span>
+          <span class="bank-radio" aria-hidden="true"></span>
+        </li>
+        <li class="bank-option selected" data-bank="m10">
+          <input type="radio" name="bank" id="bank-m10" value="m10" checked>
+          <span class="bank-icon m10"><img src="icons/m10-logo.svg" alt="m10"></span>
+          <span class="bank-label">m10</span>
+          <span class="bank-radio" aria-hidden="true"></span>
+        </li>
+        <li class="bank-option" data-bank="abb">
+          <input type="radio" name="bank" id="bank-abb" value="abb">
+          <span class="bank-icon abb"><img src="icons/abb-logo.svg" alt="ABB Pay"></span>
+          <span class="bank-label">ABB Pay</span>
+          <span class="bank-radio" aria-hidden="true"></span>
+        </li>
+        <li class="bank-option" data-bank="akart">
+          <input type="radio" name="bank" id="bank-akart" value="akart">
+          <span class="bank-icon akart"><img src="icons/akart-logo.svg" alt="Akart"></span>
+          <span class="bank-label">Akart</span>
+          <span class="bank-radio" aria-hidden="true"></span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn btn-pay" id="btn-pay" disabled>Pay 100 AZN</button>
+      <div class="or-row">
+        <span class="or-line" aria-hidden="true"></span>
+        <p class="or">OR</p>
+        <span class="or-line" aria-hidden="true"></span>
+      </div>
+      <button type="button" class="btn btn-apple">
+        <img src="icons/apple-pay-logo.svg" alt="Apple Pay" class="btn-apple-icon">
+      </button>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <footer class="page-footer">
+    <div class="payment-logos-section">
+      <div class="payment-logos" aria-hidden="true">
+        <span class="payment-logo" title="Visa"><img src="icons/visa-icon.png" alt="Visa"></span>
+        <span class="payment-logo" title="Mastercard"><img src="icons/master-card-icon.png" alt="Mastercard"></span>
+        <span class="payment-logo" title="Amex"><img src="icons/american-express-icon.png" alt="Amex"></span>
+        <span class="payment-logo" title="UnionPay"><img src="icons/unionpay-icon.png" alt="UnionPay"></span>
+        <span class="payment-logo" title="Apple Pay"><img src="icons/apple-pay-icon.png" alt="Apple Pay"></span>
+        <span class="payment-logo" title="Google Pay"><img src="icons/google-pay-icon.png" alt="Google Pay"></span>
+      </div>
+      <div class="secure-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        <span>Secure payment provided by</span>
+        <span class="yigim-logo"><img src="icons/yigim-logo.png" alt="Yığım"></span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="modal-processing" aria-hidden="true" aria-modal="true" role="dialog" aria-labelledby="modal-title">
+    <div class="modal">
+      <div class="modal-spinner" aria-hidden="true"></div>
+      <h2 class="modal-title" id="modal-title">Processing payment...</h2>
+      <p class="modal-desc">Your payment is being securely processed. Please do not close or refresh this page.</p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-installment-info" aria-hidden="true" aria-modal="true" role="dialog" aria-labelledby="modal-installment-title">
+    <div class="info-modal">
+      <div class="info-modal-icon" aria-hidden="true">
+        <img src="icons/info-modal-icon.svg" alt="" width="40" height="40">
+      </div>
+      <h2 class="info-modal-title" id="modal-installment-title">Important Notice</h2>
+      <p class="info-modal-text">
+        If payment is made by selecting an installment card, but your card is not an installment card, your payment will be unsuccessful.
+      </p>
+      <button type="button" class="info-modal-btn" id="modal-installment-close">Got it</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-error" aria-hidden="true" aria-modal="true" role="dialog" aria-labelledby="modal-error-title">
+    <div class="modal-error">
+      <button type="button" class="modal-error-close" aria-label="Close" id="modal-error-close">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l12 12M16 4L4 16"/></svg>
+      </button>
+      <div class="modal-error-body">
+        <div class="modal-error-icon-wrap" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none" stroke="#FF3236" stroke-width="3" stroke-linecap="round"><path d="M12 12l16 16M28 12L12 28"/></svg>
+        </div>
+        <div class="modal-error-heading">
+          <span class="modal-error-label">Error</span>
+          <h2 class="modal-error-title" id="modal-error-title">Payment Could Not Complete</h2>
+        </div>
+        <div class="modal-error-card">
+          <div class="modal-error-row">
+            <span class="modal-error-row-label">Operation Error Code</span>
+            <span class="modal-error-row-value" id="error-code">01112</span>
+          </div>
+          <div class="modal-error-row">
+            <span class="modal-error-row-label">Description</span>
+            <span class="modal-error-row-value" id="error-desc">Declined</span>
+          </div>
+          <div class="modal-error-row">
+            <span class="modal-error-row-label">REF</span>
+            <span class="modal-error-row-value" id="error-ref">TEST_REFERENCE_17612</span>
+          </div>
+        </div>
+        <button type="button" class="modal-error-btn" id="modal-error-btn">Try again</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const btnPay = document.getElementById('btn-pay');
+    const modal = document.getElementById('modal-processing');
+    const modalError = document.getElementById('modal-error');
+    const btnApple = document.querySelector('.btn-apple');
+    const installmentInfoIcon = document.querySelector('.installment-title .info');
+    const installmentInfoModal = document.getElementById('modal-installment-info');
+    const installmentInfoClose = document.getElementById('modal-installment-close');
+
+    function showProcessingModal() {
+      modal.classList.add('visible');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function hideProcessingModal() {
+      modal.classList.remove('visible');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    function showErrorModal(payload) {
+      hideProcessingModal();
+      if (payload) {
+        const code = document.getElementById('error-code');
+        const desc = document.getElementById('error-desc');
+        const ref = document.getElementById('error-ref');
+        if (code && payload.errorCode != null) code.textContent = payload.errorCode;
+        if (desc && payload.description != null) desc.textContent = payload.description;
+        if (ref && payload.ref != null) ref.textContent = payload.ref;
+      }
+      modalError.classList.add('visible');
+      modalError.setAttribute('aria-hidden', 'false');
+    }
+
+    function hideErrorModal() {
+      modalError.classList.remove('visible');
+      modalError.setAttribute('aria-hidden', 'true');
+    }
+
+    document.getElementById('modal-error-btn').addEventListener('click', hideErrorModal);
+    document.getElementById('modal-error-close').addEventListener('click', hideErrorModal);
+
+    function showInstallmentInfoModal() {
+      if (!installmentInfoModal) return;
+      installmentInfoModal.classList.add('visible');
+      installmentInfoModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function hideInstallmentInfoModal() {
+      if (!installmentInfoModal) return;
+      installmentInfoModal.classList.remove('visible');
+      installmentInfoModal.setAttribute('aria-hidden', 'true');
+    }
+
+    if (installmentInfoIcon) {
+      installmentInfoIcon.addEventListener('click', showInstallmentInfoModal);
+    }
+    if (installmentInfoClose) {
+      installmentInfoClose.addEventListener('click', hideInstallmentInfoModal);
+    }
+    if (installmentInfoModal) {
+      installmentInfoModal.addEventListener('click', (e) => {
+        if (e.target === installmentInfoModal) hideInstallmentInfoModal();
+      });
+    }
+
+    function setActiveTab(target) {
+      document.querySelectorAll('.tab').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      const tab = document.querySelector('[data-tab="' + target + '"]');
+      const panel = document.getElementById('panel-' + target);
+      if (tab) {
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+      }
+      if (panel) panel.classList.add('active');
+
+      if (target === 'bank') {
+        btnPay.classList.add('btn-yellow');
+        btnPay.disabled = false;
+      } else if (target === 'installment') {
+        btnPay.classList.remove('btn-yellow');
+        btnPay.disabled = true;
+        updateInstallmentPayButton();
+      } else {
+        btnPay.classList.remove('btn-yellow');
+        btnPay.disabled = true;
+      }
+    }
+
+    function isInstallmentFormValid() {
+      const panel = document.getElementById('panel-installment');
+      if (!panel || !panel.classList.contains('active')) return false;
+      const cardInput = panel.querySelector('input[autocomplete="cc-number"]');
+      const expInput = panel.querySelector('input[autocomplete="cc-exp"]');
+      const cvcInput = panel.querySelector('input[autocomplete="cc-csc"]');
+      const monthsSelect = document.getElementById('months-select');
+      const cardDigits = (cardInput && cardInput.value) ? cardInput.value.replace(/\D/g, '') : '';
+      const expDigits = (expInput && expInput.value) ? expInput.value.replace(/\D/g, '') : '';
+      const cvc = (cvcInput && cvcInput.value) ? cvcInput.value.replace(/\D/g, '') : '';
+      const months = monthsSelect ? monthsSelect.value : '';
+      if (cardDigits.length < 16 || expDigits.length < 4 || cvc.length < 3) return false;
+      const month = parseInt(expDigits.slice(0, 2), 10);
+      if (month < 1 || month > 12) return false;
+      if (!['3', '6', '12', '24'].includes(months)) return false;
+      return true;
+    }
+
+    function updateInstallmentPayButton() {
+      const tab = document.querySelector('.tab.active');
+      if (!tab || tab.dataset.tab !== 'installment') return;
+      if (isInstallmentFormValid()) {
+        btnPay.classList.add('btn-yellow');
+        btnPay.disabled = false;
+      } else {
+        btnPay.classList.remove('btn-yellow');
+        btnPay.disabled = true;
+      }
+    }
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => setActiveTab(tab.dataset.tab));
+    });
+
+    document.querySelectorAll('.bank-option').forEach(option => {
+      option.addEventListener('click', () => {
+        const radio = option.querySelector('input[type="radio"]');
+        if (!radio) return;
+        radio.checked = true;
+        document.querySelectorAll('.bank-option').forEach(o => o.classList.remove('selected'));
+        option.classList.add('selected');
+      });
+    });
+
+    btnPay.addEventListener('click', showProcessingModal);
+    btnApple.addEventListener('click', showProcessingModal);
+
+    // Card inputs: digits only, card number with spaces, expiry as MM/YY
+    function formatCardNumber(value) {
+      const digits = value.replace(/\D/g, '').slice(0, 16);
+      return digits.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+    }
+    function formatExpiry(value) {
+      const digits = value.replace(/\D/g, '').slice(0, 4);
+      if (digits.length <= 2) return digits;
+      return digits.slice(0, 2) + '/' + digits.slice(2);
+    }
+    document.querySelectorAll('input[autocomplete="cc-number"]').forEach(function (input) {
+      input.setAttribute('maxlength', '19');
+      input.addEventListener('input', function () {
+        const formatted = formatCardNumber(this.value);
+        this.value = formatted;
+        this.setSelectionRange(formatted.length, formatted.length);
+      });
+      input.addEventListener('keypress', function (e) {
+        if (!/^\d$/.test(e.key) && !/^(Backspace|Delete|Tab|ArrowLeft|ArrowRight)$/.test(e.key)) e.preventDefault();
+      });
+    });
+    document.querySelectorAll('input[autocomplete="cc-exp"]').forEach(function (input) {
+      input.setAttribute('placeholder', 'MM/YY');
+      input.addEventListener('input', function () {
+        this.value = formatExpiry(this.value);
+      });
+      input.addEventListener('keypress', function (e) {
+        if (!/^\d$/.test(e.key) && !/^(Backspace|Delete|Tab|ArrowLeft|ArrowRight)$/.test(e.key)) e.preventDefault();
+      });
+    });
+    document.querySelectorAll('input[autocomplete="cc-csc"]').forEach(function (input) {
+      input.addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '').slice(0, 4);
+      });
+      input.addEventListener('keypress', function (e) {
+        if (!/^\d$/.test(e.key) && !/^(Backspace|Delete|Tab|ArrowLeft|ArrowRight)$/.test(e.key)) e.preventDefault();
+      });
+    });
+
+    const installmentPrompt = document.getElementById('installment-card-prompt');
+    const btnInstallmentSwitch = document.getElementById('btn-installment-switch');
+    const cardNumberInput = document.querySelector('#panel-card input[autocomplete="cc-number"]');
+
+    function updateInstallmentPromptVisibility() {
+      const digits = (cardNumberInput && cardNumberInput.value) ? cardNumberInput.value.replace(/\D/g, '') : '';
+      if (installmentPrompt) {
+        installmentPrompt.classList.toggle('visible', digits.length >= 15);
+      }
+    }
+
+    if (cardNumberInput) {
+      cardNumberInput.addEventListener('input', updateInstallmentPromptVisibility);
+      cardNumberInput.addEventListener('change', updateInstallmentPromptVisibility);
+    }
+    if (btnInstallmentSwitch) {
+      btnInstallmentSwitch.addEventListener('click', () => setActiveTab('installment'));
+    }
+
+    (function attachInstallmentInputListeners() {
+      const panel = document.getElementById('panel-installment');
+      if (!panel) return;
+      panel.querySelectorAll('input').forEach(function (input) {
+        input.addEventListener('input', updateInstallmentPayButton);
+        input.addEventListener('change', updateInstallmentPayButton);
+      });
+    })();
+
+    (function initMonthsDropdown() {
+      const dropdown = document.getElementById('months-dropdown');
+      const trigger = document.getElementById('months-trigger');
+      const triggerLabel = document.getElementById('months-trigger-label');
+      const list = document.getElementById('months-list');
+      const select = document.getElementById('months-select');
+      const backdrop = document.getElementById('months-dropdown-backdrop');
+      if (!dropdown || !trigger || !list || !select) return;
+
+      function open() {
+        dropdown.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+        list.removeAttribute('hidden');
+      }
+      function close() {
+        dropdown.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+        list.setAttribute('hidden', '');
+      }
+      function setValue(value, label) {
+        select.value = value;
+        triggerLabel.textContent = label || 'Choose months';
+        if (typeof updateInstallmentPayButton === 'function') updateInstallmentPayButton();
+      }
+
+      trigger.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (dropdown.classList.contains('open')) close();
+        else open();
+      });
+
+      if (backdrop) {
+        backdrop.addEventListener('click', close);
+      }
+
+      list.querySelectorAll('.months-dropdown-option').forEach(function (opt) {
+        opt.addEventListener('click', function () {
+          setValue(opt.dataset.value, opt.dataset.label || opt.textContent);
+          close();
+        });
+      });
+
+      document.addEventListener('click', function (e) {
+        if (dropdown.classList.contains('open') && !dropdown.contains(e.target)) close();
+      });
+    })();
+
+    const push30Section = document.querySelector('.push30');
+    const push30Toggle = document.querySelector('.push30-expand');
+
+    if (push30Section && push30Toggle) {
+      push30Toggle.addEventListener('click', () => {
+        const isExpanded = push30Section.classList.toggle('push30--expanded');
+        push30Toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      });
+    }
+  </script>
+</body>
+</html>

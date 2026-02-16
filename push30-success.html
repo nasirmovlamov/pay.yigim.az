@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Successful — P30</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/geist@5/index.css" crossorigin="">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: #1E1E1E;
+    }
+
+    /* Success */
+    .success {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+      gap: 40px;
+      isolation: isolate;
+      width: 100%;
+      max-width: 400px;
+      min-height: 712px;
+      background: #FFFFFF;
+      box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.04);
+      border-radius: 20px;
+      flex: none;
+      position: relative;
+    }
+
+    /* Frame 1321314122 - header block */
+    .success-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+      gap: 32px;
+      width: 100%;
+      max-width: 352px;
+      flex: none;
+      order: 1;
+      align-self: stretch;
+      z-index: 1;
+    }
+
+    /* Frame 2131332671 - P30 icon (black box) */
+    .success-header-icon {
+      width: 72px;
+      height: 72px;
+      background: #000000;
+      border: 6px solid #F7F7F7;
+      box-shadow: inset 0px 8px 20px rgba(255, 255, 255, 0.4);
+      border-radius: 20px;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-header-logo {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #24B67C;
+    }
+
+    /* Frame 1321314117 - thank you + title */
+    .success-header-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+      gap: 16px;
+      width: 227px;
+      flex: none;
+    }
+
+    .success-header-label {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #888888;
+    }
+
+    .success-header-title {
+      font-weight: 500;
+      font-size: 19px;
+      text-align: center;
+      color: #1E1E1E;
+      width: 100%;
+    }
+
+    /* Card list */
+    .card-list {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 12px 20px;
+      gap: 2px;
+      width: 100%;
+      max-width: 352px;
+      height: auto;
+      min-height: 328px;
+      background: #FFFFFF;
+      border: 1px solid #F3F3F3;
+      border-radius: 16px;
+      flex: none;
+      order: 2;
+      align-self: stretch;
+      z-index: 2;
+    }
+
+    .card-list-row {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      width: 100%;
+      min-height: 32px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      flex: none;
+      align-self: stretch;
+    }
+
+    .card-list-row:last-child {
+      border-bottom: none;
+    }
+
+    .card-list-label {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: -0.01em;
+      color: #888888;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .card-list-value {
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: -0.01em;
+      color: #1E1E1E;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    /* button */
+    .success-btn {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 24px;
+      gap: 8px;
+      width: 100%;
+      max-width: 352px;
+      height: 44px;
+      background: #F3F3F3;
+      border: none;
+      border-radius: 100px;
+      font-family: inherit;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: #1E1E1E;
+      cursor: pointer;
+      text-decoration: none;
+      flex: none;
+      order: 3;
+      align-self: stretch;
+      z-index: 3;
+      transition: background 0.15s ease;
+    }
+
+    .success-btn:hover {
+      background: #e8e8e8;
+    }
+
+    /* Mobile: card full height, 24px from top, 6px sides, button at bottom */
+    @media (max-width: 480px) {
+      body {
+        background-color: #FFFFFF;
+        flex-direction: column;
+        padding: 24px 16px 0;
+        align-items: stretch;
+        min-height: 100vh;
+      }
+
+      .success {
+        max-width: none;
+        width: 100%;
+        height: calc(100vh - 24px);
+        min-height: calc(100vh - 24px);
+        padding: 0 6px 6px;
+        gap: 40px;
+        box-shadow: none;
+      }
+
+      .success-header {
+        max-width: 100%;
+      }
+
+      .card-list {
+        border-color: #F3F3F3;
+        max-width: 100%;re
+      }
+
+      .success-btn {
+        margin-top: auto;
+        margin-bottom: 24px;
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="success">
+    <header class="success-header">
+      <div class="success-header-icon">
+        <span class="success-header-logo">
+          <img src="icons/push30-icon.png" alt="Push 30">
+        </span>
+      </div>
+      <div class="success-header-text">
+        <div class="success-header-label">Thank you</div>
+        <h1 class="success-header-title">Your payment was completed successfully.</h1>
+      </div>
+    </header>
+
+    <section class="card-list">
+      <div class="card-list-row">
+        <span class="card-list-label">Card Number</span>
+        <span class="card-list-value">520000******4056</span>
+      </div>
+      <div class="card-list-row">
+        <span class="card-list-label">Amount</span>
+        <span class="card-list-value">100.00 AZN</span>
+      </div>
+      <div class="card-list-row">
+        <span class="card-list-label">Commission</span>
+        <span class="card-list-value">0.00 AZN</span>
+      </div>
+      <div class="card-list-row">
+        <span class="card-list-label">Description</span>
+        <span class="card-list-value">Test payment</span>
+      </div>
+      <div class="card-list-row">
+        <span class="card-list-label">Order Number</span>
+        <span class="card-list-value">REF988993</span>
+      </div>
+      <div class="card-list-row">
+        <span class="card-list-label">Transaction ID</span>
+        <span class="card-list-value">YV82HGB6UL</span>
+      </div>
+      <div class="card-list-row">
+        <span class="card-list-label">RRN</span>
+        <span class="card-list-value">600815123578</span>
+      </div>
+      <div class="card-list-row">
+        <span class="card-list-label">Bank Auth. Code</span>
+        <span class="card-list-value">590689</span>
+      </div>
+      <div class="card-list-row">
+        <span class="card-list-label">Payment Date</span>
+        <span class="card-list-value">2026.01.08 15:26:32</span>
+      </div>
+    </section>
+
+    <a href="#" class="success-btn" id="backBtn">Back to website</a>
+  </main>
+
+  <script>
+    document.getElementById('backBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      var returnUrl = new URLSearchParams(window.location.search).get('return_url');
+      if (returnUrl) {
+        window.location.href = returnUrl;
+      } else {
+        window.location.href = '#';
+      }
+    });
+  </script>
+</body>
+</html>
