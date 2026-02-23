@@ -54,7 +54,7 @@
       padding: 0;
       width: 100%;
       max-width: 400px;
-      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.04));
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
       border-radius: 16px;
       margin-bottom: 20px;
       flex: none;
@@ -95,7 +95,7 @@
       display: flex;
       flex-direction: row;
       align-items: flex-start;
-      padding: 4px 0;
+      /* padding: 4px 0; */
       gap: 10px;
       width: 64px;
       height: 72px;
@@ -159,6 +159,13 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
+      max-height: 40px;
+      transition: max-height 0.3s ease;
+    }
+
+    .push30--expanded .push30-desc {
+      -webkit-line-clamp: unset;
+      max-height: 400px;
     }
 
     .push30-expand {
@@ -172,13 +179,18 @@
       background: rgba(48, 48, 48, 0.08);
       color: #4B4B4B;
       cursor: pointer;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       padding: 0;
+      padding-top: 2px;
       flex: none;
       flex-grow: 0;
       z-index: 1;
+    }
+
+    .push30--expandable .push30-expand {
+      display: flex;
     }
 
     .push30-expand svg {
@@ -280,7 +292,7 @@
       max-width: 400px;
       height: 64px;
       border-radius: 16px;
-      background: #F3F3F3;
+      /* background: #F3F3F3; */
       margin-bottom: 24px;
       flex: none;
       align-self: stretch;
@@ -311,7 +323,8 @@
     }
 
     .tab:hover {
-      color: #1E1E1E;
+      background-color:#FFFFFF66;
+      color: var(--text-primary);
     }
 
     .tab.active {
@@ -479,10 +492,11 @@
     }
 
     .months-dropdown-trigger {
+      position: relative;
       box-sizing: border-box;
       width: 100%;
       padding: 12px 40px 12px 14px;
-      border: 1px solid rgba(48, 48, 48, 0.06);
+      border: 1px solid rgba(48, 48, 48, 0);
       border-radius: 12px;
       font-family: 'Geist', 'Inter', inherit;
       font-weight: 400;
@@ -503,11 +517,17 @@
       right: 14px;
       top: 50%;
       transform: translateY(-50%);
-      width: 12px;
-      height: 12px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat center;
+      width: 20px;
+      height: 20px;
+      border-radius: 20px;
+      background: rgba(48, 48, 48, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: transform 0.2s ease;
     }
+
+    
 
     .months-dropdown.open .months-dropdown-chevron {
       transform: translateY(-50%) rotate(180deg);
@@ -856,7 +876,7 @@
       background: #FFC107;
       color: #1E1E1E;
       font-family: 'Geist', 'Inter', inherit;
-      font-weight: 600;
+      font-weight: 400;
       font-size: 14px;
       line-height: 24px;
       cursor: pointer;
@@ -877,7 +897,7 @@
     .installment-title {
       font-size: 13px;
       color: var(--text-secondary);
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -902,10 +922,14 @@
       line-height: 1;
     }
 
+    .info svg {
+      padding-left:1px;
+    }
+
     .flags {
       display: flex;
       gap: 8px;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     .flag {
@@ -919,8 +943,8 @@
     .flag.kz { background: linear-gradient(to right, #00afca 33%, #fec50 33%, #fec50 66%, #00afca 66%); }
 
     .flags .flag-icon {
-      height: 20px;
-      width: auto;
+      height: 18px;
+      width: 24px;
       border-radius: 2px;
       object-fit: contain;
     }
@@ -933,10 +957,8 @@
     }
 
     .bank-logo {
-      height: 24px;
+      height: 16px;
       max-width: 80px;
-      object-fit: contain;
-      filter: grayscale(0.3);
     }
 
     .bank-placeholder {
@@ -1161,7 +1183,7 @@
       padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 8px;
       width: 100%;
     }
 
@@ -1169,7 +1191,7 @@
       box-sizing: border-box;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       width: 100%;
       height: 48px;
       min-height: 48px;
@@ -1201,9 +1223,9 @@
     }
 
     .bank-icon {
-      width: 36px;
-      height: 36px;
-      min-width: 36px;
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -1301,21 +1323,21 @@
     .modal {
       background: var(--card-bg);
       border-radius: var(--radius);
-      padding: 40px 32px;
-      max-width: 320px;
+      padding: 32px 32px 40px 32px;
+      max-width: 400px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
     }
 
     .info-modal {
       background: #FFFFFF;
       border-radius: 24px;
-      padding: 32px 32px 28px;
+      padding: 32px 20px 20px 20px;
       max-width: 360px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
     }
 
     .info-modal-icon {
@@ -1390,6 +1412,9 @@
     }
 
     .modal-desc {
+      margin: auto;
+      text-align: center;
+      width: 254px;
       font-size: 14px;
       color: var(--text-secondary);
       line-height: 1.5;
@@ -1409,7 +1434,7 @@
       max-width: calc(100vw - 48px);
       box-sizing: border-box;
       background: #FFFFFF;
-      box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
       border-radius: 20px;
       flex: none;
       align-self: center;
@@ -1641,6 +1666,10 @@
         font-size: 11px;
       }
 
+      .tab:hover{
+        background-color: #FFFFFF66;
+      }
+
       .payment-details {
         max-width: 100%;
         display: block;
@@ -1774,11 +1803,14 @@
           </div>
           <div class="push30-info">
             <span class="push30-name">Push 30</span>
-            <p class="push30-desc">Push 30 is a modern payment service that allows you to make fast, secure payments online.</p>
+            <p class="push30-desc">Push 30 is a modern payment service that allows you to make fast, secure payments online. It supports multiple currencies, instant transfers, and works with leading banks. Your transactions are protected with strong encryption and you can track every payment in real time.</p>
           </div>
         </div>
         <button type="button" class="push30-expand" aria-label="Expand">
-          <svg width="6" height="3" viewBox="0 0 6 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1L3 2.5L5 1"/></svg>
+          <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.75 0.75L3.75 3.75L6.75 0.75" stroke="#4B4B4B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
         </button>
       </div>
       <div class="push30-bottom">
@@ -1786,10 +1818,10 @@
           <span class="push30-total-label">Total price</span>
           <span class="push30-total-amount">100.00 AZN</span>
         </div>
-        <div class="push30-approx" id="push30-approx">
+        <!-- <div class="push30-approx" id="push30-approx">
           <span class="push30-approx-label">Approximate amount</span>
           <span class="push30-approx-value">723,850.59 UZS</span>
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -1883,7 +1915,13 @@
                 </select>
                 <button type="button" class="months-dropdown-trigger" id="months-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="months-trigger-label">
                   <span id="months-trigger-label">Choose months</span>
-                  <span class="months-dropdown-chevron" aria-hidden="true"></span>
+                  <span class="months-dropdown-chevron" aria-hidden="true">
+                    <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.75 0.75L3.75 3.75L6.75 0.75" stroke="#4B4B4B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+
+                  </span>
                 </button>
                 <div class="months-dropdown-backdrop" id="months-dropdown-backdrop" aria-hidden="true"></div>
                 <div class="months-dropdown-sheet">
@@ -1919,7 +1957,13 @@
       <div class="installment-meta">
         <div class="installment-title">
           Installment card supported countries
-          <span class="info" title="Supported countries">i</span>
+          <span class="info" title="Supported countries">
+            <svg width="5" height="10" viewBox="0 0 5 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 8.84144V4.37529V3.4375H0V4.37529H1.1292V8.84144H0V9.99975H4.13951V8.84144H3Z" fill="currentColor"/>
+              <path d="M1.85405 2.30772C2.49131 2.30772 3.00791 1.79112 3.00791 1.15386C3.00791 0.5166 2.49131 0 1.85405 0C1.2168 0 0.700195 0.5166 0.700195 1.15386C0.700195 1.79112 1.2168 2.30772 1.85405 2.30772Z" fill="currentColor"/>
+            </svg>
+
+          </span>
         </div>
         <div class="flags">
           <img src="icons/azerbaijan-flag.svg" alt="Azerbaijan" title="Azerbaijan" class="flag-icon">
@@ -1931,7 +1975,7 @@
           <img src="icons/unibank-logo.svg" alt="Unibank" class="bank-logo">
           <img src="icons/tamkart-logo.svg" alt="Tamkart" class="bank-logo">
           <img src="icons/birbank-logo.svg" alt="Birbank" class="bank-logo">
-          <img src="icons/bolkart-logo.svg" alt="Bolkart" class="bank-logo">
+          <img src="icons/bolkart-logo.svg" alt="Bolkart" class="bank-logo"> <br/>
           <img src="icons/kapitalbank-logo.svg" alt="Kapital Bank" class="bank-logo">
           <img src="icons/uzumbank.svg" alt="Uzum Bank" class="bank-logo">
         </div>
@@ -2179,8 +2223,15 @@
       }
     }
 
+    const tabsEl = document.querySelector('.tabs');
     document.querySelectorAll('.tab').forEach(tab => {
-      tab.addEventListener('click', () => setActiveTab(tab.dataset.tab));
+      tab.addEventListener('click', () => {
+        setActiveTab(tab.dataset.tab);
+        if (tabsEl && window.matchMedia('(max-width: 768px)').matches) {
+          const top = tabsEl.getBoundingClientRect().top + window.scrollY - 10;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      });
     });
 
     document.querySelectorAll('.bank-option').forEach(option => {
@@ -2312,8 +2363,21 @@
 
     const push30Section = document.querySelector('.push30');
     const push30Toggle = document.querySelector('.push30-expand');
+    const push30Desc = document.querySelector('.push30-desc');
+
+    function updatePush30Expandable() {
+      if (!push30Section || !push30Desc) return;
+      const isExpanded = push30Section.classList.contains('push30--expanded');
+      const overflow = push30Desc.scrollHeight > push30Desc.clientHeight;
+      push30Section.classList.toggle('push30--expandable', isExpanded || overflow);
+    }
 
     if (push30Section && push30Toggle) {
+      if (push30Desc) {
+        updatePush30Expandable();
+        const ro = new ResizeObserver(updatePush30Expandable);
+        ro.observe(push30Section);
+      }
       push30Toggle.addEventListener('click', () => {
         const isExpanded = push30Section.classList.toggle('push30--expanded');
         push30Toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');

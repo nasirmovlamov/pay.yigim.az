@@ -1,141 +1,161 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment Successful — Yığım</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/geist@5/index.css" crossorigin="">
-  <style>
-    :root {
-      --bg-page: #ffffff;
-      --card-bg: #ffffff;
-      --text-primary: #1a1a1a;
-      --text-secondary: #888888;
-      --success-bg: #e0fff2;
-      --success-icon: #6bd89d;
-      --btn-gray-bg: #e8e8e8;
-      --btn-gray-text: #333333;
-      --radius: 24px;
-      --radius-btn: 12px;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Successful — Yığım</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/geist@5/index.css"
+      crossorigin=""
+    />
+    <style>
+      :root {
+        --bg-page: #ffffff;
+        --card-bg: #ffffff;
+        --text-primary: #1a1a1a;
+        --text-secondary: #888888;
+        --success-bg: #e0fff2;
+        --success-icon: #6bd89d;
+        --btn-gray-bg: #e8e8e8;
+        --btn-gray-text: #333333;
+        --radius: 24px;
+        --radius-btn: 12px;
+      }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    html {
-      -webkit-tap-highlight-color: transparent;
-    }
+      html {
+        -webkit-tap-highlight-color: transparent;
+      }
 
-    body {
-      font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-page);
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      padding-left: max(20px, env(safe-area-inset-left));
-      padding-right: max(20px, env(safe-area-inset-right));
-      padding-bottom: max(20px, env(safe-area-inset-bottom));
-      color: var(--text-primary);
-    }
+      body {
+        font-family:
+          "Geist",
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background: var(--bg-page);
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
+        color: var(--text-primary);
+      }
 
-    .card {
-      max-width: 400px;
-      width: 100%;
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 40px 24px 32px;
-      text-align: center;
-    }
-
-    .success-icon {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 20px;
-      background: var(--success-bg);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .success-icon svg {
-      width: 32px;
-      height: 32px;
-      stroke: var(--success-icon);
-    }
-
-    .thank-you {
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-    }
-
-    .title {
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1.4;
-      color: var(--text-primary);
-      margin-bottom: 28px;
-    }
-
-    .btn-done {
-      display: block;
-      width: 100%;
-      min-height: 48px;
-      padding: 14px 24px;
-      font-family: inherit;
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--btn-gray-text);
-      background: var(--btn-gray-bg);
-      border: none;
-      border-radius: var(--radius-btn);
-      cursor: pointer;
-      transition: background 0.15s ease, opacity 0.15s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .btn-done:hover {
-      background: #ddd;
-    }
-
-    .btn-done:active {
-      opacity: 0.9;
-    }
-
-    @media (min-width: 480px) {
       .card {
-        padding: 48px 32px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        width: 100%;
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        padding: 40px 24px 32px;
+        text-align: center;
       }
+
+      .success-icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 20px;
+        background: var(--success-bg);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .success-icon svg {
+        width: 32px;
+        height: 32px;
+        stroke: var(--success-icon);
+      }
+
+      .thank-you {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        color: var(--text-secondary);
+        margin-bottom: 16px;
+      }
+
       .title {
-        font-size: 22px;
-        margin-bottom: 32px;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.4;
+        color: var(--text-primary);
+        margin-bottom: 28px;
       }
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <div class="success-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 6L9 17l-5-5"/>
-      </svg>
+
+      .btn-done {
+        display: block;
+        width: 100%;
+        min-height: 48px;
+        padding: 14px 24px;
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--btn-gray-text);
+        background: var(--btn-gray-bg);
+        border: none;
+        border-radius: var(--radius-btn);
+        cursor: pointer;
+        transition:
+          background 0.15s ease,
+          opacity 0.15s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .btn-done:hover {
+        background: #ddd;
+      }
+
+      .btn-done:active {
+        opacity: 0.9;
+      }
+
+      @media (min-width: 480px) {
+        .card {
+          padding: 48px 32px;
+          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
+        }
+        .title {
+          font-size: 22px;
+          margin-bottom: 32px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="success-icon">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M20 6L9 17l-5-5" />
+        </svg>
+      </div>
+      <p class="thank-you">THANK YOU</p>
+      <h1 class="title">Payment Completed<br />Successfully</h1>
+      <button type="button" class="btn-done">Done</button>
     </div>
-    <p class="thank-you">THANK YOU</p>
-    <h1 class="title">Payment Completed<br>Successfully</h1>
-    <button type="button" class="btn-done">Done</button>
-  </div>
-</body>
+  </body>
 </html>
