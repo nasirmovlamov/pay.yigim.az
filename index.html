@@ -1645,7 +1645,7 @@
     @media (max-width: 768px) {
       .card {
         max-width: 100%;
-        padding: 0;
+        padding: 0 !important;
       }
 
       .payment-logos-section {
@@ -2035,7 +2035,7 @@
         <p class="or">OR</p>
         <span class="or-line" aria-hidden="true"></span>
       </div>
-      <button type="button" class="btn btn-apple">
+      <button type="button" class="btn btn-apple" id="btn-apple" disabled>
         <img src="icons/apple-pay-logo.svg" alt="Apple Pay" class="btn-apple-icon">
       </button>
     </div>
@@ -2121,7 +2121,7 @@
     const btnPay = document.getElementById('btn-pay');
     const modal = document.getElementById('modal-processing');
     const modalError = document.getElementById('modal-error');
-    const btnApple = document.querySelector('.btn-apple');
+    const btnApple = document.getElementById('btn-apple');
     const installmentInfoIcon = document.querySelector('.installment-title .info');
     const installmentInfoModal = document.getElementById('modal-installment-info');
     const installmentInfoClose = document.getElementById('modal-installment-close');
@@ -2199,14 +2199,30 @@
       if (target === 'bank') {
         btnPay.classList.add('btn-yellow');
         btnPay.disabled = false;
+        if (btnApple) btnApple.disabled = false;
       } else if (target === 'installment') {
         btnPay.classList.remove('btn-yellow');
         btnPay.disabled = true;
         updateInstallmentPayButton();
+      } else if (target === 'card') {
+        btnPay.classList.remove('btn-yellow');
+        btnPay.disabled = true;
+        updateCardPayButton();
       } else {
         btnPay.classList.remove('btn-yellow');
         btnPay.disabled = true;
+        if (btnApple) btnApple.disabled = true;
       }
+    }
+
+    function isExpiryValid(input) {
+      const expDigits = (input && input.value) ? input.value.replace(/\D/g, '') : '';
+      if (expDigits.length < 4) return false;
+      const first = parseInt(expDigits.slice(0, 2), 10);
+      const last = parseInt(expDigits.slice(2, 4), 10);
+      const firstValid = first >= 1 && first <= 12;
+      const lastValid = last >= 1 && last <= 12;
+      return firstValid || lastValid;
     }
 
     function isInstallmentFormValid() {
@@ -2217,13 +2233,24 @@
       const cvcInput = panel.querySelector('input[autocomplete="cc-csc"]');
       const monthsSelect = document.getElementById('months-select');
       const cardDigits = (cardInput && cardInput.value) ? cardInput.value.replace(/\D/g, '') : '';
-      const expDigits = (expInput && expInput.value) ? expInput.value.replace(/\D/g, '') : '';
       const cvc = (cvcInput && cvcInput.value) ? cvcInput.value.replace(/\D/g, '') : '';
       const months = monthsSelect ? monthsSelect.value : '';
-      if (cardDigits.length < 16 || expDigits.length < 4 || cvc.length < 3) return false;
-      const month = parseInt(expDigits.slice(0, 2), 10);
-      if (month < 1 || month > 12) return false;
+      if (cardDigits.length < 16 || cvc.length < 3) return false;
+      if (!isExpiryValid(expInput)) return false;
       if (!['3', '6', '12', '24'].includes(months)) return false;
+      return true;
+    }
+
+    function isCardFormValid() {
+      const panel = document.getElementById('panel-card');
+      if (!panel || !panel.classList.contains('active')) return false;
+      const cardInput = panel.querySelector('input[autocomplete="cc-number"]');
+      const expInput = panel.querySelector('input[autocomplete="cc-exp"]');
+      const cvcInput = panel.querySelector('input[autocomplete="cc-csc"]');
+      const cardDigits = (cardInput && cardInput.value) ? cardInput.value.replace(/\D/g, '') : '';
+      const cvc = (cvcInput && cvcInput.value) ? cvcInput.value.replace(/\D/g, '') : '';
+      if (cardDigits.length < 16 || cvc.length < 3) return false;
+      if (!isExpiryValid(expInput)) return false;
       return true;
     }
 
@@ -2233,9 +2260,25 @@
       if (isInstallmentFormValid()) {
         btnPay.classList.add('btn-yellow');
         btnPay.disabled = false;
+        if (btnApple) btnApple.disabled = false;
       } else {
         btnPay.classList.remove('btn-yellow');
         btnPay.disabled = true;
+        if (btnApple) btnApple.disabled = true;
+      }
+    }
+
+    function updateCardPayButton() {
+      const tab = document.querySelector('.tab.active');
+      if (!tab || tab.dataset.tab !== 'card') return;
+      if (isCardFormValid()) {
+        btnPay.classList.add('btn-yellow');
+        btnPay.disabled = false;
+        if (btnApple) btnApple.disabled = false;
+      } else {
+        btnPay.classList.remove('btn-yellow');
+        btnPay.disabled = true;
+        if (btnApple) btnApple.disabled = true;
       }
     }
 
@@ -2347,6 +2390,15 @@
       panel.querySelectorAll('input').forEach(function (input) {
         input.addEventListener('input', updateInstallmentPayButton);
         input.addEventListener('change', updateInstallmentPayButton);
+      });
+    })();
+
+    (function attachCardInputListeners() {
+      const panel = document.getElementById('panel-card');
+      if (!panel) return;
+      panel.querySelectorAll('input').forEach(function (input) {
+        input.addEventListener('input', updateCardPayButton);
+        input.addEventListener('change', updateCardPayButton);
       });
     })();
 
