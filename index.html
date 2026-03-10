@@ -2279,6 +2279,16 @@
         const formatted = formatCardNumber(this.value);
         this.value = formatted;
         this.setSelectionRange(formatted.length, formatted.length);
+        const digits = formatted.replace(/\D/g, '');
+        if (digits.length === 16) {
+          const panel = this.closest('.panel');
+          if (panel) {
+            const expInput = panel.querySelector('input[autocomplete="cc-exp"]');
+            if (expInput) {
+              expInput.focus();
+            }
+          }
+        }
       });
       input.addEventListener('keypress', function (e) {
         if (!/^\d$/.test(e.key) && !/^(Backspace|Delete|Tab|ArrowLeft|ArrowRight)$/.test(e.key)) e.preventDefault();
@@ -2288,6 +2298,16 @@
       input.setAttribute('placeholder', 'MM/YY');
       input.addEventListener('input', function () {
         this.value = formatExpiry(this.value);
+        const digits = this.value.replace(/\D/g, '');
+        if (digits.length === 4) {
+          const panel = this.closest('.panel');
+          if (panel) {
+            const cvcInput = panel.querySelector('input[autocomplete="cc-csc"]');
+            if (cvcInput) {
+              cvcInput.focus();
+            }
+          }
+        }
       });
       input.addEventListener('keypress', function (e) {
         if (!/^\d$/.test(e.key) && !/^(Backspace|Delete|Tab|ArrowLeft|ArrowRight)$/.test(e.key)) e.preventDefault();
