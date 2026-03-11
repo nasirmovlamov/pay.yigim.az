@@ -2215,6 +2215,24 @@
       }
     }
 
+    function luhnCheck(number) {
+      const digits = (number || '').replace(/\D/g, '');
+      if (digits.length < 12) return false;
+      let sum = 0;
+      let shouldDouble = false;
+      for (let i = digits.length - 1; i >= 0; i--) {
+        let digit = parseInt(digits.charAt(i), 10);
+        if (Number.isNaN(digit)) return false;
+        if (shouldDouble) {
+          digit *= 2;
+          if (digit > 9) digit -= 9;
+        }
+        sum += digit;
+        shouldDouble = !shouldDouble;
+      }
+      return sum % 10 === 0;
+    }
+
     function isExpiryValid(input) {
       const expDigits = (input && input.value) ? input.value.replace(/\D/g, '') : '';
       if (expDigits.length < 4) return false;
@@ -2236,6 +2254,7 @@
       const cvc = (cvcInput && cvcInput.value) ? cvcInput.value.replace(/\D/g, '') : '';
       const months = monthsSelect ? monthsSelect.value : '';
       if (cardDigits.length < 16 || cvc.length < 3) return false;
+      if (!luhnCheck(cardDigits)) return false;
       if (!isExpiryValid(expInput)) return false;
       if (!['3', '6', '12', '24'].includes(months)) return false;
       return true;
@@ -2250,6 +2269,7 @@
       const cardDigits = (cardInput && cardInput.value) ? cardInput.value.replace(/\D/g, '') : '';
       const cvc = (cvcInput && cvcInput.value) ? cvcInput.value.replace(/\D/g, '') : '';
       if (cardDigits.length < 16 || cvc.length < 3) return false;
+      if (!luhnCheck(cardDigits)) return false;
       if (!isExpiryValid(expInput)) return false;
       return true;
     }
