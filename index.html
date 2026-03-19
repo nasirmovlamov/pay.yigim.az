@@ -1546,7 +1546,7 @@
 </head>
 
 <body>
-  <form action={url} method="post" autocomplete="off" class="card">
+  <form action="https://httpbin.org/post" method="post" autocomplete="off" class="card">
     <section class="push30" aria-label="Push 30 payment service">
       <div class="push30-top">
         <div class="push30-header">
@@ -1751,6 +1751,7 @@
         <ul class="bank-list" role="radiogroup" aria-label="Choose the bank">
           <li class="bank-option" data-bank="birpay">
             <input type="radio" name="bank" id="bank-birpay" value="birpay">
+            <input type="hidden" name="amount" value="{amount}">
             <span class="bank-icon birpay"><img src="icons/birpay-logo.svg" alt="Bir Pay"></span>
             <span class="bank-label">Bir Pay</span>
             <span class="bank-radio" aria-hidden="true"></span>
