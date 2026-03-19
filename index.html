@@ -1546,7 +1546,7 @@
 </head>
 
 <body>
-  <form action="https://httpbin.org/post" method="post" autocomplete="off" class="card">
+  <form action={url} method="post" autocomplete="off" class="card">
     <section class="push30" aria-label="Push 30 payment service">
       <div class="push30-top">
         <div class="push30-header">
@@ -1615,18 +1615,27 @@
             <div class="input-row">
               <div class="input-group full">
                 <span class="input-icon" aria-hidden="true"></span>
-                <input type="text" placeholder="Card number" inputmode="numeric" maxlength="19" autocomplete="cc-number"
-                  name="pan">
+                <input type="text" id="card-pan" placeholder="Card number" inputmode="numeric" maxlength="19"
+                  autocomplete="cc-number" data-name="pan">
               </div>
             </div>
             <div class="input-row">
               <div class="input-group half">
-                <input type="text" placeholder="MM/YY" maxlength="5" autocomplete="cc-exp">
+                <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5" autocomplete="cc-exp">
               </div>
               <div class="input-group half">
-                <input type="text" placeholder="CVC" inputmode="numeric" maxlength="4" autocomplete="cc-csc" name="csc">
+                <input type="text" id="card-csc" placeholder="CVC" inputmode="numeric" maxlength="4"
+                  autocomplete="cc-csc" data-name="csc">
               </div>
             </div>
+            <div class="input-row">
+              <div class="input-group full">
+              </div>
+            </div>
+            <input type="hidden" id="payment-amount" value="{amount}" data-name="amount">
+            <input type="hidden" id="payment-id" value={paymentId} data-name="id">
+            <input type="hidden" id="payment-month" data-name="month">
+            <input type="hidden" id="payment-year" data-name="year">
           </div>
         </div>
         <div class="installment-card-prompt" id="installment-card-prompt" aria-live="polite">
@@ -1650,22 +1659,24 @@
             <div class="input-row">
               <div class="input-group full">
                 <span class="input-icon" aria-hidden="true"></span>
-                <input type="text" placeholder="Card number" inputmode="numeric" maxlength="19" autocomplete="cc-number"
-                  name="pan">
+                <input type="text" id="installment-pan" placeholder="Card number" inputmode="numeric" maxlength="19"
+                  autocomplete="cc-number" data-name="pan">
               </div>
             </div>
             <div class="input-row">
               <div class="input-group half">
-                <input type="text" placeholder="MM/YY" maxlength="5" autocomplete="cc-exp">
+                <input type="text" id="installment-expiry" placeholder="MM/YY" maxlength="5" autocomplete="cc-exp">
               </div>
               <div class="input-group half">
-                <input type="text" placeholder="CVC" inputmode="numeric" maxlength="4" autocomplete="cc-csc" name="csc">
+                <input type="text" id="installment-csc" placeholder="CVC" inputmode="numeric" maxlength="4"
+                  autocomplete="cc-csc" data-name="csc">
               </div>
             </div>
             <div class="input-row">
               <div class="input-group full">
                 <div class="months-dropdown" id="months-dropdown">
-                  <select aria-label="Choose months" id="months-select" name="installment" hidden aria-hidden="true">
+                  <select aria-label="Choose months" id="months-select" data-name="installment" hidden
+                    aria-hidden="true">
                     <option value="">Choose months</option>
                     <option value="3">3 months</option>
                     <option value="6">6 months</option>
@@ -1712,6 +1723,8 @@
                 </div>
               </div>
             </div>
+            <input type="hidden" id="installment-month" data-name="month">
+            <input type="hidden" id="installment-year" data-name="year">
           </div>
         </div>
 
@@ -1750,26 +1763,25 @@
         <h2 class="section-title">Choose the bank</h2>
         <ul class="bank-list" role="radiogroup" aria-label="Choose the bank">
           <li class="bank-option" data-bank="birpay">
-            <input type="radio" name="bank" id="bank-birpay" value="birpay">
-            <input type="hidden" name="amount" value="{amount}">
+            <input type="radio" id="bank-birpay" value="birpay" data-name="bank">
             <span class="bank-icon birpay"><img src="icons/birpay-logo.svg" alt="Bir Pay"></span>
             <span class="bank-label">Bir Pay</span>
             <span class="bank-radio" aria-hidden="true"></span>
           </li>
           <li class="bank-option selected" data-bank="m10">
-            <input type="radio" name="bank" id="bank-m10" value="m10" checked>
+            <input type="radio" id="bank-m10" value="m10" checked data-name="bank">
             <span class="bank-icon m10"><img src="icons/m10-logo.svg" alt="m10"></span>
             <span class="bank-label">m10</span>
             <span class="bank-radio" aria-hidden="true"></span>
           </li>
           <li class="bank-option" data-bank="abb">
-            <input type="radio" name="bank" id="bank-abb" value="abb">
+            <input type="radio" id="bank-abb" value="abb" data-name="bank">
             <span class="bank-icon abb"><img src="icons/abb-logo.svg" alt="ABB Pay"></span>
             <span class="bank-label">ABB Pay</span>
             <span class="bank-radio" aria-hidden="true"></span>
           </li>
           <li class="bank-option" data-bank="akart">
-            <input type="radio" name="bank" id="bank-akart" value="akart">
+            <input type="radio" id="bank-akart" value="akart" data-name="bank">
             <span class="bank-icon akart"><img src="icons/akart-logo.svg" alt="Akart"></span>
             <span class="bank-label">Akart</span>
             <span class="bank-radio" aria-hidden="true"></span>
@@ -1818,6 +1830,65 @@
     <script>
       const btnPay = document.getElementById('btn-pay');
       const btnApple = document.getElementById('btn-apple');
+      const form = document.querySelector('form');
+
+      if (form) {
+        form.addEventListener('submit', function () {
+          var activePanel = form.querySelector('.panel.active');
+          if (!activePanel) return;
+
+          // Clear name from all inputs that use data-name so only active tab is posted
+          form.querySelectorAll('[data-name]').forEach(function (el) {
+            el.removeAttribute('name');
+          });
+
+          var panelId = activePanel.id;
+
+          if (panelId === 'panel-card') {
+            ['card-pan', 'card-csc', 'payment-id', 'payment-month', 'payment-year'].forEach(function (id) {
+              var el = document.getElementById(id);
+              if (!el) return;
+              // normalize PAN to digits only before posting
+              if (id === 'card-pan') {
+                el.value = (el.value || '').replace(/\D/g, '');
+              }
+              if (el.getAttribute('data-name')) el.setAttribute('name', el.getAttribute('data-name'));
+            });
+            var cardExp = document.getElementById('card-expiry');
+            var monthEl = document.getElementById('payment-month');
+            var yearEl = document.getElementById('payment-year');
+            if (cardExp && monthEl && yearEl) {
+              var digits = (cardExp.value || '').replace(/\D/g, '').slice(0, 4);
+              monthEl.value = digits.slice(0, 2);
+              yearEl.value = digits.slice(2, 4);
+            }
+          } else if (panelId === 'panel-installment') {
+            ['installment-pan', 'installment-csc', 'installment-month', 'installment-year', 'months-select'].forEach(function (id) {
+              var el = document.getElementById(id);
+              if (!el) return;
+              // normalize PAN to digits only before posting
+              if (id === 'installment-pan') {
+                el.value = (el.value || '').replace(/\D/g, '');
+              }
+              if (el.getAttribute('data-name')) el.setAttribute('name', el.getAttribute('data-name'));
+            });
+            var instExp = document.getElementById('installment-expiry');
+            var monthEl = document.getElementById('installment-month');
+            var yearEl = document.getElementById('installment-year');
+            if (instExp && monthEl && yearEl) {
+              var digits = (instExp.value || '').replace(/\D/g, '').slice(0, 4);
+              monthEl.value = digits.slice(0, 2);
+              yearEl.value = digits.slice(2, 4);
+            }
+          } else if (panelId === 'panel-bank') {
+            activePanel.querySelectorAll('input[data-name="bank"]').forEach(function (el) {
+              el.setAttribute('name', 'bank');
+            });
+            var amountEl = document.getElementById('payment-amount');
+            if (amountEl && amountEl.getAttribute('data-name')) amountEl.setAttribute('name', amountEl.getAttribute('data-name'));
+          }
+        });
+      }
 
       function setActiveTab(target) {
         document.querySelectorAll('.tab').forEach(t => {
